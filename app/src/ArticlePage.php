@@ -32,6 +32,14 @@ namespace {
             return ArticlePage::get()->exclude('ID', $this->ID)->sort('Created DESC')->limit(4);
         }
 
+        public function onBeforeWrite()
+        {
+            parent::onBeforeWrite();
+            if (!$this->Author) {
+                $this->Author = 'Anonymous Ghost';
+            }
+        }
+
         public function getCMSFields()
         {
             $fields = parent::getCMSFields();
