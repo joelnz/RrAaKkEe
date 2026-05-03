@@ -1,34 +1,30 @@
-## Overview
+# RrAaKkEe
 
-[![CI](https://github.com/silverstripe/silverstripe-installer/actions/workflows/ci.yml/badge.svg)](https://github.com/silverstripe/silverstripe-installer/actions/workflows/ci.yml)
-[![Silverstripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
+**RrAaKkEe** is a collage experiment.
 
-Base project folder for a Silverstripe ([http://silverstripe.org](http://silverstripe.org)) installation. Required modules are installed via [http://github.com/silverstripe/recipe-cms](http://github.com/silverstripe/recipe-cms). For information on how to change the dependencies in a recipe, please have a look at [https://github.com/silverstripe/recipe-plugin](https://github.com/silverstripe/recipe-plugin). In addition, installer includes [silverstripe/startup-theme](https://github.com/silverstripe/startup-theme) as a default theme.
+## The Concept
 
-## Installation
+I started this in 2015. The idea was that I  feed the generator samples of writing (news articles, books, essays) and click Generate. It produces new text based on the probability of what word would come next. I paired the output with my own photos from Flickr. The titles that came out were often fun and weirdly poetic, and I liked seeing what unexpected image combinations would appear.
 
-```sh
-composer create-project silverstripe/installer my-app
-```
+The name comes from the garden tool — raking everything in together.
 
-See [Getting Started](https://docs.silverstripe.org/en/getting_started/) for more information.
+In 2026 I remade the whole project in **SilverStripe CMS** to prepare for an interview at **AKQA**.
 
-## Bugtracker
+## Technical Details
 
-Bugs are tracked on github.com ([framework issues](https://github.com/silverstripe/silverstripe-framework/issues),
-[cms issues](https://github.com/silverstripe/silverstripe-cms/issues)).
-Please read our [issue reporting guidelines](https://docs.silverstripe.org/en/contributing/issues_and_bugs/).
+- **Custom Design:** Built the layout from scratch in pure CSS - its loosly based on a 2015 version of the Guardian's website.
+- **CMS:** Used SilverStripe to create custom page types for articles, with fields like Image Captions to keep the admin panel straightforward.
+- **Built-in Generator:** The original 2015 probability logic lives inside the CMS. A Generate button in the admin panel instantly creates a dummy article (title, excerpt, and body) for testing how layouts look with content in them.
 
-## Development and Contribution
+## Tech Stack
 
-If you would like to make changes to the Silverstripe core codebase, we have an extensive [guide to contributing code](https://docs.silverstripe.org/en/contributing/code/).
+- **CMS:** SilverStripe 6 (PHP 8)
+- **Styles:** Vanilla CSS3
+- **Logic:** Vanilla JavaScript
 
-## Links
+## How to Run
 
- * [Changelogs](https://docs.silverstripe.org/en/changelogs/)
- * [Bugtracker: Framework](https://github.com/silverstripe/silverstripe-framework/issues)
- * [Bugtracker: CMS](https://github.com/silverstripe/silverstripe-cms/issues)
- * [Bugtracker: Installer](https://github.com/silverstripe/silverstripe-installer/issues)
- * [Forums](http://silverstripe.org/forums)
- * [Developer Mailinglist](https://groups.google.com/forum/#!forum/silverstripe-dev)
- * [License](./LICENSE)
+1. `composer install`
+2. Set up your `.env` file
+3. Run `vendor/bin/sake dev/build flush=all`
+4. Log into `/admin` to see the generator

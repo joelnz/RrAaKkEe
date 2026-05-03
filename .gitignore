@@ -5,3 +5,6 @@
 /vendor/
 /_resources/
 /public/_resources/
+/public/assets/
+.DS_Store
+*.log
