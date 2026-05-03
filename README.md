@@ -1,6 +1,6 @@
 # RrAaKkEe
 
-**RrAaKkEe** is a collage experiment build in **Silverstripe CMS**.
+RrAaKkEe is a poetic news site build in Silverstripe CMS.
 
 ## The Concept
 
