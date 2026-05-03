@@ -32,6 +32,11 @@ namespace {
             return ArticlePage::get()->exclude('ID', $this->ID)->sort('Created DESC')->limit(4);
         }
 
+        public function getArticleAuthor()
+        {
+            return $this->getField('Author');
+        }
+
         public function onBeforeWrite()
         {
             parent::onBeforeWrite();

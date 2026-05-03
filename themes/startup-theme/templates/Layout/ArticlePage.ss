@@ -1,5 +1,4 @@
 <div id="article-wrap">
-
     <%-- Col 1, Row 1: section label --%>
     <div id="art-col1-top">
         <% if $Category %>
@@ -17,7 +16,7 @@
 
     <%-- Col 1, Row 2: author / date / share --%>
     <div id="art-col1-bottom">
-        <% if $Author %><div class="art-author">$Author</div><% end_if %>
+        <% if $ArticleAuthor %><div class="art-author">$ArticleAuthor</div><% end_if %>
         <div class="art-date">$Created.Format("EEEE d MMMM Y")</div>
         <div class="share-icons">
             <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
@@ -38,7 +37,7 @@
 
         <%-- Inline meta: only visible when left col is hidden (mobile) --%>
         <div class="art-inline-meta">
-            <% if $Author %><div class="art-author">$Author</div><% end_if %>
+            <% if $ArticleAuthor %><div class="art-author">$ArticleAuthor</div><% end_if %>
             <div class="art-date">$Created.Format("EEEE d MMMM Y")</div>
             <div class="share-icons">
                 <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
