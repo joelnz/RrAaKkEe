@@ -16,6 +16,12 @@ namespace {
             return ArticlePage::get()->sort('Created DESC')->limit(10);
         }
 
+        /** Get all ArticlesPage section holders for multi-section home layout */
+        public function getArticleSections()
+        {
+            return ArticlesPage::get()->sort('Sort ASC');
+        }
+
         public function getFeaturedArticle()
         {
             return ArticlePage::get()->sort('Created DESC')->first();
