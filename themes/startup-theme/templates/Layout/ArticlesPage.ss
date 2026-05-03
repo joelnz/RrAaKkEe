@@ -99,7 +99,7 @@
 
 <%-- OVERFLOW: remaining articles in 4-column rows --%>
 <% if $OverflowArticles %>
-<div id="section2">
+<div id="section-overflow">
     <div class="s2spacer"></div>
     <% loop $OverflowArticles %>
     <div class="s2col">
