@@ -42,7 +42,7 @@ namespace {
             $exclude = [];
             if ($f = $this->getFeaturedArticle()) $exclude[] = $f->ID;
             if ($s = $this->getSecondaryArticle()) $exclude[] = $s->ID;
-            return ArticlePage::get()->exclude('ID', $exclude)->sort('Created DESC')->limit(6);
+            return ArticlePage::get()->exclude('ID', $exclude)->sort('Created DESC')->limit(8);
         }
 
         /** First 2 grid articles — shown as image cards */
@@ -51,16 +51,16 @@ namespace {
             return $this->getGridArticles()->limit(2, 0);
         }
 
-        /** Next 2 grid articles — shown as text drawers in column 3 */
+        /** Next 3 grid articles — shown as text drawers in column 3 */
         public function getDrawerArticlesCol3()
         {
-            return $this->getGridArticles()->limit(2, 2);
+            return $this->getGridArticles()->limit(3, 2);
         }
 
-        /** Next 2 grid articles — shown as text drawers in column 4 */
+        /** Next 3 grid articles — shown as text drawers in column 4 */
         public function getDrawerArticlesCol4()
         {
-            return $this->getGridArticles()->limit(2, 4);
+            return $this->getGridArticles()->limit(3, 5);
         }
 
         public function getCMSFields()
@@ -139,19 +139,24 @@ namespace {
                                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                                 body: "text=" + encodeURIComponent(raw)
                             })
-                            .then(function(r) { return r.json(); })
-                            .then(function(data) {
-                                if (data.success) {
-                                    setStatus("Done — " + data.updated + " articles regenerated. Reload any article page to see the new content.", "#27ae60");
-                                } else {
-                                    setStatus("Error: " + (data.error || "unknown error"), "#c0392b");
-                                }
-                                if (btn) btn.disabled = false;
-                            })
-                            .catch(function(err) {
-                                setStatus("Request failed — " + err, "#c0392b");
-                                if (btn) btn.disabled = false;
-                            });
+                             .then(function(r) { 
+                                 if (!r.ok) {
+                                     return r.text().then(function(t) { throw new Error(t || "Server error"); });
+                                 }
+                                 return r.json(); 
+                             })
+                             .then(function(data) {
+                                 if (data.success) {
+                                     setStatus("Done — " + data.updated + " articles regenerated. Reload any article page to see the new content.", "#27ae60");
+                                 } else {
+                                     setStatus("Error: " + (data.error || "unknown error"), "#c0392b");
+                                 }
+                                 if (btn) btn.disabled = false;
+                             })
+                             .catch(function(err) {
+                                 setStatus("Request failed — " + err.message, "#c0392b");
+                                 if (btn) btn.disabled = false;
+                             });
                         }
                     });
                 })();

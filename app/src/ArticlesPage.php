@@ -38,48 +38,68 @@ namespace {
             return $this->getArticles()->exclude('ID', $exclude)->limit(2, 0);
         }
 
-        /** Next 2 for section2 text drawers column 3 */
+        /** Next 3 for section2 text drawers column 3 */
         public function getSectionDrawersCol3()
         {
             $exclude = [];
             if ($f = $this->getSectionFeatured()) $exclude[] = $f->ID;
             if ($s = $this->getSectionSecondary()) $exclude[] = $s->ID;
-            return $this->getArticles()->exclude('ID', $exclude)->limit(2, 2);
+            return $this->getArticles()->exclude('ID', $exclude)->limit(3, 2);
         }
 
-        /** Next 2 for section2 text drawers column 4 */
+        /** Next 3 for section2 text drawers column 4 */
         public function getSectionDrawersCol4()
         {
             $exclude = [];
             if ($f = $this->getSectionFeatured()) $exclude[] = $f->ID;
             if ($s = $this->getSectionSecondary()) $exclude[] = $s->ID;
-            return $this->getArticles()->exclude('ID', $exclude)->limit(2, 4);
+            return $this->getArticles()->exclude('ID', $exclude)->limit(3, 5);
         }
 
-        /** First overflow row - reversed: 2 drawers on left, 2 cards on right */
-        public function getOverflowRow1Drawers()
+        /** 
+         * Grouped overflow articles after the first 10.
+         * Returns an ArrayList of groups, each containing 8 articles and a layout type.
+         */
+        public function getGroupedOverflow()
         {
             $exclude = [];
             if ($f = $this->getSectionFeatured()) $exclude[] = $f->ID;
             if ($s = $this->getSectionSecondary()) $exclude[] = $s->ID;
-            return $this->getArticles()->exclude('ID', $exclude)->limit(2, 6);
-        }
+            if ($cards = $this->getSectionImageCards()) foreach($cards as $c) $exclude[] = $c->ID;
+            if ($d3 = $this->getSectionDrawersCol3()) foreach($d3 as $d) $exclude[] = $d->ID;
+            if ($d4 = $this->getSectionDrawersCol4()) foreach($d4 as $d) $exclude[] = $d->ID;
 
-        public function getOverflowRow1Cards()
-        {
-            $exclude = [];
-            if ($f = $this->getSectionFeatured()) $exclude[] = $f->ID;
-            if ($s = $this->getSectionSecondary()) $exclude[] = $s->ID;
-            return $this->getArticles()->exclude('ID', $exclude)->limit(2, 8);
-        }
+            $remaining = $this->getArticles()->exclude('ID', $exclude);
+            $list = \SilverStripe\Model\List\ArrayList::create();
+            
+            $count = 0;
+            $currentGroup = \SilverStripe\Model\List\ArrayList::create();
+            $layoutIndex = 1; // 1 = Reversed, 2 = Normal
 
-        /** Remaining articles after the first 12 */
-        public function getOverflowArticles()
-        {
-            $exclude = [];
-            if ($f = $this->getSectionFeatured()) $exclude[] = $f->ID;
-            if ($s = $this->getSectionSecondary()) $exclude[] = $s->ID;
-            return $this->getArticles()->exclude('ID', $exclude)->limit(100, 10);
+            foreach ($remaining as $article) {
+                $currentGroup->push($article);
+                $count++;
+
+                if ($count == 8) {
+                    $list->push(\SilverStripe\Model\ArrayData::create([
+                        'Articles' => $currentGroup,
+                        'IsReversed' => ($layoutIndex % 2 !== 0)
+                    ]));
+                    $currentGroup = \SilverStripe\Model\List\ArrayList::create();
+                    $count = 0;
+                    $layoutIndex++;
+                }
+            }
+
+            // Push remaining if any (less than 4)
+            if ($currentGroup->count() > 0) {
+                $list->push(\SilverStripe\Model\ArrayData::create([
+                    'Articles' => $currentGroup,
+                    'IsReversed' => ($layoutIndex % 2 !== 0)
+                ]));
+            }
+
+            return $list;
         }
     }
 }

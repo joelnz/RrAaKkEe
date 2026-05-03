@@ -98,66 +98,127 @@
 </div>
 
 <%-- OVERFLOW ROW 1: Reversed (Drawers, Drawers, Card, Card) --%>
-<% if $OverflowRow1Drawers || $OverflowRow1Cards %>
-<div id="section2">
+<% loop $GroupedOverflow %>
+<div id="section2" class="section2-row">
     <div class="s2spacer"></div>
     
-    <div class="s2col">
-        <div class="s2inner t">
-            <% loop $OverflowRow1Drawers.Limit(1) %>
-            <a href="$Link"><div class="s2drawer">
-                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
-            </div></a>
-            <% end_loop %>
+    <% if $IsReversed %>
+        <%-- REVERSED: 2 text columns on left, 2 image cards on right --%>
+        <%-- Column 1: 3 Drawers --%>
+        <div class="s2col">
+            <div class="s2inner t">
+                <% loop $Articles.Limit(3) %>
+                <a href="$Link"><div class="s2drawer">
+                    <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+                </div></a>
+                <% end_loop %>
+            </div>
         </div>
-    </div>
-    
-    <div class="s2col">
-        <div class="s2inner t">
-            <% loop $OverflowRow1Drawers.Limit(1,1) %>
-            <a href="$Link"><div class="s2drawer">
-                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
-            </div></a>
-            <% end_loop %>
+        <%-- Column 2: 3 Drawers --%>
+        <div class="s2col">
+            <div class="s2inner t">
+                <% loop $Articles.Limit(3,3) %>
+                <a href="$Link"><div class="s2drawer">
+                    <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+                </div></a>
+                <% end_loop %>
+            </div>
         </div>
-    </div>
+        <%-- Column 3: Card --%>
+        <% loop $Articles.Limit(1,6) %>
+        <div class="s2col">
+            <div class="s2inner">
+                <a href="$Link">
+                    <% if $FeaturedImage %>
+                        $FeaturedImage.Fill(540,400)
+                    <% else %>
+                        <div class="news-placeholder" style="width:100%;padding-top:74%;"></div>
+                    <% end_if %>
+                    <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+                </a>
+            </div>
+        </div>
+        <% end_loop %>
+        <%-- Column 4: Card --%>
+        <% loop $Articles.Limit(1,7) %>
+        <div class="s2col">
+            <div class="s2inner">
+                <a href="$Link">
+                    <% if $FeaturedImage %>
+                        $FeaturedImage.Fill(540,400)
+                    <% else %>
+                        <div class="news-placeholder" style="width:100%;padding-top:74%;"></div>
+                    <% end_if %>
+                    <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+                </a>
+            </div>
+        </div>
+        <% end_loop %>
 
-    <% loop $OverflowRow1Cards %>
-    <div class="s2col">
-        <div class="s2inner">
-            <a href="$Link">
-                <% if $FeaturedImage %>
-                    $FeaturedImage.Fill(540,400)
-                <% else %>
-                    <div class="news-placeholder" style="width:100%;padding-top:74%;"></div>
-                <% end_if %>
-                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
-            </a>
+    <% else %>
+        <%-- NORMAL: 2 image cards on left, 2 text columns on right --%>
+        <%-- Column 1: Card --%>
+        <% loop $Articles.Limit(1) %>
+        <div class="s2col">
+            <div class="s2inner">
+                <a href="$Link">
+                    <% if $FeaturedImage %>
+                        $FeaturedImage.Fill(540,400)
+                    <% else %>
+                        <div class="news-placeholder" style="width:100%;padding-top:74%;"></div>
+                    <% end_if %>
+                    <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+                </a>
+            </div>
         </div>
-    </div>
-    <% end_loop %>
-</div>
-<% end_if %>
+        <% end_loop %>
+        <%-- Column 2: Card --%>
+        <% loop $Articles.Limit(1,1) %>
+        <div class="s2col">
+            <div class="s2inner">
+                <a href="$Link">
+                    <% if $FeaturedImage %>
+                        $FeaturedImage.Fill(540,400)
+                    <% else %>
+                        <div class="news-placeholder" style="width:100%;padding-top:74%;"></div>
+                    <% end_if %>
+                    <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+                </a>
+            </div>
+        </div>
+        <% end_loop %>
 
-<%-- FINAL OVERFLOW: everything else in simple stack --%>
-<% if $OverflowArticles %>
-<div id="section-overflow">
-    <div class="s2spacer"></div>
-    <% loop $OverflowArticles %>
-    <div class="s2col">
-        <div class="s2inner">
-            <a href="$Link">
-                <% if $FeaturedImage %>
-                    $FeaturedImage.Fill(540,400)
-                <% else %>
-                    <div class="news-placeholder" style="width:100%;padding-top:74%;"></div>
-                <% end_if %>
-                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
-            </a>
+        <%-- Column 3: 3 Drawers --%>
+        <div class="s2col">
+            <div class="s2inner t">
+                <% loop $Articles.Limit(3,2) %>
+                <a href="$Link"><div class="s2drawer">
+                    <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+                </div></a>
+                <% end_loop %>
+            </div>
         </div>
-    </div>
-    <% end_loop %>
+        <%-- Column 4: 3 Drawers --%>
+        <div class="s2col">
+            <div class="s2inner t">
+                <% loop $Articles.Limit(3,5) %>
+                <a href="$Link"><div class="s2drawer">
+                    <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+                </div></a>
+                <% end_loop %>
+            </div>
+        </div>
+    <% end_if %>
+
+    <%-- Spacer columns if the last row is incomplete --%>
+    <% if $Articles.Count == 1 %>
+        <div class="s2col"></div><div class="s2col"></div><div class="s2col"></div>
+    <% else_if $Articles.Count == 2 %>
+        <div class="s2col"></div><div class="s2col"></div>
+    <% else_if $Articles.Count == 3 %>
+        <div class="s2col"></div>
+    <% end_if %>
 </div>
-<% end_if %>
+<% end_loop %>
 
 <% end_if %>

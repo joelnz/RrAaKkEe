@@ -10,8 +10,75 @@ namespace {
 
     class ArticleGeneratorController extends Controller
     {
-        private static $allowed_actions = ['generate'];
-        private static $url_handlers    = ['generate' => 'generate'];
+        private static $allowed_actions = ['generate', 'seed'];
+        private static $url_handlers    = [
+            'generate' => 'generate',
+            'seed'     => 'seed'
+        ];
+
+        public function seed(HTTPRequest $request): HTTPResponse
+        {
+            $response = HTTPResponse::create();
+            $response->addHeader('Content-Type', 'application/json');
+
+            if (!Permission::check('CMS_ACCESS_CMSMain')) {
+                $response->setStatusCode(403);
+                $response->setBody(json_encode(['error' => 'Not authorised']));
+                return $response;
+            }
+
+            $text = $request->postVar('text');
+            if (!$text || strlen(trim($text)) < 100) {
+                // Try to fallback to some default text if not provided
+                $text = "The quick brown fox jumps over the lazy dog. A digital collage experiment that blends language, probability, and imagery. I started this project in 2015 as an exploration of collected content. The name comes from the garden tool—raking together fallen leaves, fragments of news, books, and essays into one place. The heart of the project is a text generator that I built to analyze writing samples and generate new articles based on word probability. I paired these generated texts with my own photography from Flickr to see what kind of poetic titles and weird image juxtapositions would come up. It is an experiment in how machine logic can create new meaning through collage.";
+            }
+
+            $chain = $this->buildChain($text);
+            if (count($chain['_START']) < 5) {
+                $response->setStatusCode(400);
+                $response->setBody(json_encode(['error' => 'Not enough unique words']));
+                return $response;
+            }
+
+            // Increase limits for large batches
+            set_time_limit(300);
+            ini_set('memory_limit', '512M');
+
+            $sections = ArticlesPage::get();
+            $created = 0;
+
+            foreach ($sections as $section) {
+                for ($i = 0; $i < 24; $i++) {
+                    $content = $this->generateArticle($chain);
+                    if (!$content) continue;
+
+                    $article = ArticlePage::create();
+                    $article->ParentID = $section->ID;
+                    $article->Title   = substr($content['title'], 0, 200);
+                    $article->Excerpt = $content['excerpt'];
+                    $article->Content = $content['body'];
+                    $article->FeaturedImageCaption = substr($content['caption'], 0, 200);
+                    $article->Category = $section->Title;
+
+                    // Assign random image
+                    $randomImg = \SilverStripe\Assets\Image::get()->sort('RAND()')->first();
+                    if ($randomImg) {
+                        $article->FeaturedImageID = $randomImg->ID;
+                    }
+
+                    $article->write();
+                    $article->copyVersionToStage('Stage', 'Live');
+                    $created++;
+                }
+            }
+
+            $response->setBody(json_encode([
+                'success' => true,
+                'created' => $created,
+                'sections' => $sections->count()
+            ]));
+            return $response;
+        }
 
         public function generate(HTTPRequest $request): HTTPResponse
         {
@@ -45,6 +112,10 @@ namespace {
                 return $response;
             }
 
+            // Increase limits for large batches
+            set_time_limit(300);
+            ini_set('memory_limit', '512M');
+
             $articles = ArticlePage::get();
             $updated  = 0;
 
@@ -52,10 +123,19 @@ namespace {
                 $content = $this->generateArticle($chain);
                 if (!$content) continue;
 
-                $article->Title   = $content['title'];
+                $article->Title   = substr($content['title'], 0, 200);
                 $article->Excerpt = $content['excerpt'];
                 $article->Content = $content['body'];
-                $article->FeaturedImageCaption = $content['caption'];
+                $article->FeaturedImageCaption = substr($content['caption'], 0, 200);
+                
+                // Assign random image if not already set
+                if (!$article->FeaturedImageID) {
+                    $randomImg = \SilverStripe\Assets\Image::get()->sort('RAND()')->first();
+                    if ($randomImg) {
+                        $article->FeaturedImageID = $randomImg->ID;
+                    }
+                }
+
                 $article->write();
                 $updated++;
             }

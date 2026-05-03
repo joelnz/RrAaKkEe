@@ -246,7 +246,7 @@ small { display: none; }
     overflow: visible !important;
 }
 
-#section1, #section2, #section3 {
+#section1, #section2, #section3, .section2-row {
     display: grid !important;
     grid-template-columns: var(--grid-cols) !important;
     column-gap: var(--grid-gap) !important;
@@ -399,13 +399,28 @@ small { display: none; }
 /* =====================
    HOME — SECTION 2 (Card Grid Row)
    ===================== */
-#section2 > * {
+#section2, .section2-row, div[class="section2-row"] {
+    margin-bottom: 0 !important;
+    display: grid !important;
+    grid-template-columns: var(--grid-cols) !important;
+    column-gap: var(--grid-gap) !important;
+    width: var(--grid-w) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: var(--pad) !important;
+    padding-right: var(--pad) !important;
+    box-sizing: border-box !important;
+    border-top: 1px solid black !important;
+}
+
+#section2 > *, .section2-row > *, div[class="section2-row"] > * {
     flex: none !important;
     min-width: 0 !important;
     width: auto !important;
 }
-#section2 > .s2spacer { grid-column: 1 !important; }
-#section2 > .s2col { width: auto !important; border: none !important; }
+#section2 > .s2spacer, .section2-row > .s2spacer, div[class="section2-row"] > .s2spacer { grid-column: 1 !important; border-right: 1px solid black; }
+#section2 > .s2col, .section2-row > .s2col, div[class="section2-row"] > .s2col { width: auto !important; border-right: 1px solid black !important; }
+#section2 > .s2col:last-child, .section2-row > .s2col:last-child, div[class="section2-row"] > .s2col:last-child { border-right: none !important; }
 
 .s2inner {
     margin: 0 !important;
@@ -631,7 +646,7 @@ small { display: none; }
     #section1 > #top-art h1 { margin: 0 !important; font-size: 18px !important; line-height: 22px !important; }
 
     /* Section 2: Full stack */
-    #section2 { 
+    #section2, .section2-row { 
         display: flex !important; 
         flex-direction: column !important; 
         padding: 0 10px !important;
@@ -661,7 +676,9 @@ small { display: none; }
     /* Hide images after the first 3 articles in Section 2 */
     /* Note: .s2spacer is hidden, so we count from the first .s2col */
     #section2 > .s2col:nth-child(n+5) img,
-    #section2 > .s2col:nth-child(n+5) .news-placeholder {
+    #section2 > .s2col:nth-child(n+5) .news-placeholder,
+    .section2-row > .s2col:nth-child(n+5) img,
+    .section2-row > .s2col:nth-child(n+5) .news-placeholder {
         display: none !important;
     }
     
@@ -720,7 +737,7 @@ small { display: none; }
     #top-art { display: block !important; border-top: 1px solid black; margin-top: 10px; }
 
     /* Section 2 mobile: Full stack */
-    #section2 { display: flex !important; flex-direction: column !important; min-height: 0; padding: 0 10px !important; }
+    #section2, .section2-row { display: flex !important; flex-direction: column !important; min-height: 0; padding: 0 10px !important; }
     .s2spacer { display: none; }
     .s2col { flex: 0 0 100% !important; width: 100% !important; min-height: 0; }
     .s2inner { margin: 0 !important; height: auto; }
