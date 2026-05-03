@@ -55,6 +55,7 @@ namespace {
                 $article->Title   = $content['title'];
                 $article->Excerpt = $content['excerpt'];
                 $article->Content = $content['body'];
+                $article->FeaturedImageCaption = $content['caption'];
                 $article->write();
                 $updated++;
             }
@@ -136,6 +137,9 @@ namespace {
             // Excerpt: 1 sentence
             $excerpt = $sents[0];
 
+            // Caption: 1 sentence
+            $caption = isset($sents[1]) ? $sents[1] : $sents[0];
+
             // Body: 4 paragraphs × 3 sentences
             $body  = '';
             $start = 4;
@@ -149,7 +153,7 @@ namespace {
                 if ($para) $body .= "<p>{$para}</p>\n";
             }
 
-            return ['title' => $title, 'excerpt' => $excerpt, 'body' => $body];
+            return ['title' => $title, 'excerpt' => $excerpt, 'caption' => $caption, 'body' => $body];
         }
     }
 }

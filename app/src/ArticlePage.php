@@ -200,6 +200,9 @@ namespace {
                         // Excerpt: 1 sentence
                         var excerpt = sents[0].trim();
 
+                        // Caption: 1 sentence
+                        var caption = sents[1] ? sents[1].trim() : sents[0].trim();
+
                         // Body: 4 paragraphs of 3 sentences each = ~12 sentences total
                         var body = "";
                         var bodyStart = 4;
@@ -214,6 +217,7 @@ namespace {
 
                         fillCMSField("Form_EditForm_Title", title);
                         fillCMSField("Form_EditForm_Excerpt", excerpt);
+                        fillCMSField("Form_EditForm_FeaturedImageCaption", caption);
                         fillContentField(body);
 
                         var editorIds = window.tinymce ? tinymce.editors.map(function(e){ return e.id; }).join(", ") : "no tinymce";
