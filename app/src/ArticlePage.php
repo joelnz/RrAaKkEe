@@ -42,7 +42,7 @@ namespace {
         {
             parent::onBeforeWrite();
             if (!$this->Author) {
-                $this->Author = 'Annonymos Ghost';
+                $this->Author = 'Anonymous Ghost';
             }
         }
 

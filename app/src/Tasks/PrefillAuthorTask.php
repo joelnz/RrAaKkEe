@@ -22,7 +22,7 @@ class PrefillAuthorTask extends BuildTask
 
         $updated = 0;
         foreach ($articles as $article) {
-            $article->Author = 'Annonymos Ghost';
+            $article->Author = 'Anonymous Ghost';
             $article->write();
             if ($article->isPublished()) {
                 $article->publishRecursive();
@@ -30,7 +30,7 @@ class PrefillAuthorTask extends BuildTask
             $updated++;
         }
 
-        $output->writeln("Done! $updated articles updated to Annonymos Ghost.");
+        $output->writeln("Done! $updated articles updated to Anonymous Ghost.");
         return 0;
     }
 }
