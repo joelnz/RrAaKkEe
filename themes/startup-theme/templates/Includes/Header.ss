@@ -1,7 +1,7 @@
 <div id="mobnav">
-    <div id="navinner">
+    <a href="$BaseHref" id="navinner">
         <span class="rr">Rr</span><span class="aa">Aa</span><span class="kk">Kk</span><span class="ee">Ee</span>
-    </div>
+    </a>
     <ul class="sections">
         <% loop $Menu(1) %>
             <li><a href="$Link">$MenuTitle</a></li>
@@ -10,9 +10,9 @@
 </div>
 
 <nav>
-    <div id="navinner">
+    <a href="$BaseHref" id="navinner">
         <span class="rr">Rr</span><span class="aa">Aa</span><span class="kk">Kk</span><span class="ee">Ee</span>
-    </div>
+    </a>
     <ul class="sections">
         <% loop $Menu(1) %>
             <li><a href="$Link">$MenuTitle</a></li>

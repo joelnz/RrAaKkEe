@@ -82,8 +82,11 @@ nav {
     overflow: visible !important;
 }
 
-#navinner {
+#navinner,
+a#navinner {
     display: grid !important;
+    text-decoration: none;
+    color: black;
     grid-template-columns: var(--grid-cols) !important;
     column-gap: var(--grid-gap) !important;
     width: var(--grid-w) !important;
@@ -140,6 +143,7 @@ nav {
     list-style: none;
     display: inline;
     margin-right: 15px;
+    margin-left: 0;
     color: black;
     cursor: pointer;
 }
