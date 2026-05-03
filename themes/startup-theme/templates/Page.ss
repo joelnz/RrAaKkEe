@@ -21,7 +21,7 @@
     <script>
     $(document).scroll(function() {
         var y = $(this).scrollTop();
-        if (y > 190) { $("#mobnav").show(); }
+        if (y > 190) { $("#mobnav").css("display","flex"); }
         else { $("#mobnav").hide(); }
     });
     </script>

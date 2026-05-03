@@ -164,38 +164,47 @@ a#navinner {
     display: none;
     position: fixed;
     z-index: 999;
-    height: 66px;
+    height: 54px;
     background: black;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 #mobnav #navinner {
-    width: 12% !important;
-    margin-left: 5% !important;
-    float: left;
-    font-size: 42px;
-    height: auto;
-    display: block !important;
-    padding-bottom: 0 !important;
+    display: flex !important;
+    align-items: center;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    grid-template-columns: none !important;
 }
 #mobnav #navinner span {
-    top: 8px;
+    display: none !important;
+}
+#mobnav #navinner span.rr {
+    display: block !important;
+    font-size: 32px;
+    line-height: 1;
     color: white !important;
-    position: relative !important;
+    position: static !important;
 }
 #mobnav .sections {
-    padding-left: 25px !important;
-    width: 340px !important;
-    float: right;
-    position: relative !important;
-    bottom: auto !important;
-    left: auto !important;
-    margin: 30px 15px 0 0 !important;
-    background: black !important;
+    display: flex !important;
+    align-items: center;
+    gap: 15px;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    float: none !important;
+    background: transparent !important;
 }
 #mobnav .sections li {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: normal;
     color: white;
-    margin-right: 10px;
+    margin: 0;
 }
 #mobnav .sections li a { color: white; }
 
@@ -520,7 +529,7 @@ small { display: none; }
 /* Headline + standfirst */
 .art-headline {
     font-size: 36px; line-height: 42px; font-weight: normal;
-    margin: 0 0 16px; color: black;
+    margin: 0 0 40px; color: black;
 }
 .art-standfirst {
     font-size: 18px; line-height: 27px; color: #555;
