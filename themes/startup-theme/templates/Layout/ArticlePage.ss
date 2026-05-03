@@ -33,7 +33,13 @@
                 <div class="news-placeholder" style="width:100%;padding-top:66.66%;"></div>
             <% end_if %>
         </div>
-        <p class="art-caption"><% if $FeaturedImage %>Photograph<% end_if %></p>
+        <p class="art-caption">
+            <% if $FeaturedImageCaption %>
+                $FeaturedImageCaption
+            <% else_if $FeaturedImage %>
+                Photograph
+            <% end_if %>
+        </p>
 
         <%-- Inline meta: only visible when left col is hidden (mobile) --%>
         <div class="art-inline-meta">

@@ -4,7 +4,7 @@
     </a>
     <ul class="sections">
         <% loop $Menu(1) %>
-            <li><a href="$Link">$MenuTitle</a></li>
+            <li class="$LinkingMode"><a href="$Link">$MenuTitle</a></li>
         <% end_loop %>
     </ul>
 </div>
@@ -15,7 +15,7 @@
     </a>
     <ul class="sections">
         <% loop $Menu(1) %>
-            <li><a href="$Link">$MenuTitle</a></li>
+            <li class="$LinkingMode"><a href="$Link">$MenuTitle</a></li>
         <% end_loop %>
     </ul>
 </nav>

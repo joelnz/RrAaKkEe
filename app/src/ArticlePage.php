@@ -19,6 +19,7 @@ namespace {
             'Author'   => 'Varchar(255)',
             'Category' => 'Varchar(100)',
             'Excerpt'  => 'Text',
+            'FeaturedImageCaption' => 'Varchar(255)',
         ];
 
         private static $has_one = [
@@ -54,6 +55,7 @@ namespace {
             $upload = UploadField::create('FeaturedImage', 'Featured Image');
             $upload->setFolderName('articles');
             $fields->addFieldToTab('Root.Main', $upload, 'Content');
+            $fields->addFieldToTab('Root.Main', TextField::create('FeaturedImageCaption', 'Featured Image Caption'), 'Content');
 
             // Generator tab
             Requirements::customCSS('

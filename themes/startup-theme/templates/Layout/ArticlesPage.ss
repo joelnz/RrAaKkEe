@@ -97,7 +97,49 @@
 
 </div>
 
-<%-- OVERFLOW: remaining articles in 4-column rows --%>
+<%-- OVERFLOW ROW 1: Reversed (Drawers, Drawers, Card, Card) --%>
+<% if $OverflowRow1Drawers || $OverflowRow1Cards %>
+<div id="section2">
+    <div class="s2spacer"></div>
+    
+    <div class="s2col">
+        <div class="s2inner t">
+            <% loop $OverflowRow1Drawers.Limit(1) %>
+            <a href="$Link"><div class="s2drawer">
+                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+            </div></a>
+            <% end_loop %>
+        </div>
+    </div>
+    
+    <div class="s2col">
+        <div class="s2inner t">
+            <% loop $OverflowRow1Drawers.Limit(1,1) %>
+            <a href="$Link"><div class="s2drawer">
+                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+            </div></a>
+            <% end_loop %>
+        </div>
+    </div>
+
+    <% loop $OverflowRow1Cards %>
+    <div class="s2col">
+        <div class="s2inner">
+            <a href="$Link">
+                <% if $FeaturedImage %>
+                    $FeaturedImage.Fill(540,400)
+                <% else %>
+                    <div class="news-placeholder" style="width:100%;padding-top:74%;"></div>
+                <% end_if %>
+                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+            </a>
+        </div>
+    </div>
+    <% end_loop %>
+</div>
+<% end_if %>
+
+<%-- FINAL OVERFLOW: everything else in simple stack --%>
 <% if $OverflowArticles %>
 <div id="section-overflow">
     <div class="s2spacer"></div>

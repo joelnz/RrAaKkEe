@@ -56,14 +56,30 @@ namespace {
             return $this->getArticles()->exclude('ID', $exclude)->limit(2, 4);
         }
 
-        /** Articles beyond the first 8 for overflow rows */
+        /** First overflow row - reversed: 2 drawers on left, 2 cards on right */
+        public function getOverflowRow1Drawers()
+        {
+            $exclude = [];
+            if ($f = $this->getSectionFeatured()) $exclude[] = $f->ID;
+            if ($s = $this->getSectionSecondary()) $exclude[] = $s->ID;
+            return $this->getArticles()->exclude('ID', $exclude)->limit(2, 6);
+        }
+
+        public function getOverflowRow1Cards()
+        {
+            $exclude = [];
+            if ($f = $this->getSectionFeatured()) $exclude[] = $f->ID;
+            if ($s = $this->getSectionSecondary()) $exclude[] = $s->ID;
+            return $this->getArticles()->exclude('ID', $exclude)->limit(2, 8);
+        }
+
+        /** Remaining articles after the first 12 */
         public function getOverflowArticles()
         {
             $exclude = [];
             if ($f = $this->getSectionFeatured()) $exclude[] = $f->ID;
             if ($s = $this->getSectionSecondary()) $exclude[] = $s->ID;
-            // Skip the 6 grid articles (0-5), get the rest starting from offset 6
-            return $this->getArticles()->exclude('ID', $exclude)->limit(100, 6);
+            return $this->getArticles()->exclude('ID', $exclude)->limit(100, 10);
         }
     }
 }
