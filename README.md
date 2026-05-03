@@ -12,7 +12,7 @@ In 2026 I remade the whole project in **SilverStripe CMS** to prepare for an int
 
 ## Technical Details
 
-- **Custom Design:** Built the layout from scratch in pure CSS - its loosly based on a 2015 version of the Guardian's website.
+- **Custom Design:** Built the layout from scratch in pure CSS following BEM naming conventions - its loosly based on a 2015 version of the Guardian's website.
 - **CMS:** Used SilverStripe to create custom page types for articles, with fields like Image Captions to keep the admin panel straightforward.
 - **Built-in Generator:** The original 2015 probability logic lives inside the CMS. A Generate button in the admin panel instantly creates a dummy article (title, excerpt, and body) for testing how layouts look with content in them.
 
