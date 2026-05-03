@@ -16,13 +16,13 @@ class PrefillAuthorTask extends BuildTask
 
     protected function execute(InputInterface $input, PolyOutput $output): int
     {
-        $articles = ArticlePage::get()->filter('Author', ['', null]);
+        $articles = ArticlePage::get();
         $count = $articles->count();
-        $output->writeln("Found $count articles without an author.");
+        $output->writeln("Found $count articles.");
 
         $updated = 0;
         foreach ($articles as $article) {
-            $article->Author = 'Anonymous Ghost';
+            $article->Author = 'Annonymos Ghost';
             $article->write();
             if ($article->isPublished()) {
                 $article->publishRecursive();
@@ -30,7 +30,7 @@ class PrefillAuthorTask extends BuildTask
             $updated++;
         }
 
-        $output->writeln("Done! $updated articles updated to Anonymous Ghost.");
+        $output->writeln("Done! $updated articles updated to Annonymos Ghost.");
         return 0;
     }
 }
