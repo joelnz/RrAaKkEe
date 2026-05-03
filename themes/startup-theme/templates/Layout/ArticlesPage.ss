@@ -99,10 +99,9 @@
 
 <%-- OVERFLOW: remaining articles in 4-column rows --%>
 <% if $OverflowArticles %>
-<% loop $OverflowArticles.GroupedBy(4) %>
 <div id="section2">
     <div class="s2spacer"></div>
-    <% loop $Children %>
+    <% loop $OverflowArticles %>
     <div class="s2col">
         <div class="s2inner">
             <a href="$Link">
@@ -117,7 +116,6 @@
     </div>
     <% end_loop %>
 </div>
-<% end_loop %>
 <% end_if %>
 
 <% end_if %>
