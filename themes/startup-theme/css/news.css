@@ -723,7 +723,7 @@ small { display: none; }
     .grid-row .grid-row__drawer { padding: 12px 0 !important; }
 
     /* Section 1 mobile tweaks */
-    .featured-row__label { height: auto !important; min-height: 24px; border-top: none !important; width: 92% !important; margin: 0 4% 8px !important; }
+    .featured-row__label { height: auto !important; min-height: 24px; border-top: none !important; width: 100% !important; margin: 0 0 8px !important; }
     .featured-row__main { border-top: 1px solid black !important; }
     .featured-row__image { height: auto !important; width: 100% !important; float: left; }
     .featured-row__image-wrap { width: 100% !important; margin: 0 !important; padding-left: 0 !important; }
