@@ -1,73 +1,95 @@
-<script src="$themedResourceURL('js/premium.js')"></script>
+<%-- SECTION 1: Feature row — label + featured article + secondary article --%>
+<div id="section1">
 
-<div class="news-home nw">
-
-    <div class="news-home__contents">
-        <strong>Contents</strong>
-        <span>$Now.Format("EEEE d MMMM Y")</span>
+    <div id="col1" class="topleft">
+        <div id="inner" class="t">
+            <h1>Contents</h1>
+            <h3><span>$Now.Format("EEEE")</span><br>$Now.Format("d MMMM Y")</h3>
+        </div>
     </div>
 
-    <div class="news-featured">
-
-        <div class="news-featured__left">
-            <% with $FeaturedArticle %>
-                <% if $Category %><span class="news-cat">$Category</span><% end_if %>
-                <a href="$Link" class="news-featured__title-link">
-                    <h2 class="news-featured__title">$Title</h2>
-                </a>
-                <% if $Excerpt %><p class="news-featured__excerpt">$Excerpt</p><% end_if %>
-                <% if $Author %><span class="news-byline">$Author</span><% end_if %>
-            <% end_with %>
+    <div id="main-art">
+        <% with $FeaturedArticle %>
+        <div id="col1">
+            <div id="inner3">
+                <a href="$Link"><h1>$Title</h1></a>
+                <% if $Excerpt %><h2>$Excerpt</h2><% end_if %>
+            </div>
         </div>
-
-        <div class="news-featured__center">
-            <% with $FeaturedArticle %>
+        <div id="col2" class="b-l">
+            <div id="inner2">
                 <a href="$Link">
                     <% if $FeaturedImage %>
-                        $FeaturedImage.ScaleWidth(900)
+                        $FeaturedImage.Fill(880,632)
                     <% else %>
-                        <div class="news-placeholder" style="height:55rem;"></div>
+                        <div class="news-placeholder" style="width:100%;padding-top:66.66%;"></div>
                     <% end_if %>
                 </a>
-            <% end_with %>
+            </div>
         </div>
-
-        <div class="news-featured__right">
-            <% with $SecondaryArticle %>
-                <a href="$Link" class="news-featured__secondary">
-                    <% if $FeaturedImage %>
-                        $FeaturedImage.Fill(500,380)
-                    <% else %>
-                        <div class="news-placeholder" style="height:22rem;"></div>
-                    <% end_if %>
-                    <h3 class="news-featured__secondary-title">$Title</h3>
-                    <% if $Author %><span class="news-byline">$Author</span><% end_if %>
-                </a>
-            <% end_with %>
-        </div>
-
+        <% end_with %>
     </div>
 
-    <hr class="news-rule">
-
-    <div class="news-grid">
-        <% loop $RecentArticles.exclude('ID', $FeaturedArticle.ID).limit(8) %>
-            <a href="$Link" class="news-card">
-                <div class="news-card__image">
-                    <% if $FeaturedImage %>
-                        $FeaturedImage.Fill(400,280)
-                    <% else %>
-                        <div class="news-placeholder" style="height:18rem;"></div>
-                    <% end_if %>
-                </div>
-                <div class="news-card__body">
-                    <% if $Category %><span class="news-cat">$Category</span><% end_if %>
-                    <h3 class="news-card__title">$Title</h3>
-                    <% if $Excerpt %><p class="news-card__excerpt">$Excerpt</p><% end_if %>
-                    <span class="news-byline"><% if $Author %>$Author — <% end_if %>$Created.Format("d MMM Y")</span>
-                </div>
+    <div id="top-art">
+        <% with $SecondaryArticle %>
+        <div id="inner">
+            <a href="$Link">
+                <% if $FeaturedImage %>
+                    $FeaturedImage.Fill(440,280)
+                <% else %>
+                    <div class="news-placeholder" style="width:100%;padding-top:63.6%;"></div>
+                <% end_if %>
+                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
             </a>
-        <% end_loop %>
+        </div>
+        <% end_with %>
+    </div>
+
+</div>
+
+<div id="divider"></div>
+
+<%-- SECTION 2: 4-column card grid --%>
+<div id="section2">
+
+    <div class="s2spacer"></div>
+
+    <%-- Columns 1-2: image cards --%>
+    <% loop $ImageCardArticles %>
+    <div class="s2col">
+        <div class="s2inner">
+            <a href="$Link">
+                <% if $FeaturedImage %>
+                    $FeaturedImage.Fill(540,400)
+                <% else %>
+                    <div class="news-placeholder" style="width:100%;padding-top:74%;"></div>
+                <% end_if %>
+                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+            </a>
+        </div>
+    </div>
+    <% end_loop %>
+
+    <%-- Column 3: text drawers --%>
+    <div class="s2col">
+        <div class="s2inner t">
+            <% loop $DrawerArticlesCol3 %>
+            <a href="$Link"><div class="s2drawer">
+                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+            </div></a>
+            <% end_loop %>
+        </div>
+    </div>
+
+    <%-- Column 4: text drawers --%>
+    <div class="s2col">
+        <div class="s2inner t">
+            <% loop $DrawerArticlesCol4 %>
+            <a href="$Link"><div class="s2drawer">
+                <h1><% if $Category %><span class="blue">$Category</span> <span class="slash">/ </span><% end_if %>$Title</h1>
+            </div></a>
+            <% end_loop %>
+        </div>
     </div>
 
 </div>

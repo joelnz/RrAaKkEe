@@ -1,50 +1,69 @@
-<script src="$themedResourceURL('js/premium.js')"></script>
+<div id="article-wrap">
 
-<article class="article nw">
+    <%-- Col 1, Row 1: section label --%>
+    <div id="art-col1-top">
+        <% if $Category %>
+            <span class="art-section-label">$Category</span>
+        <% else %>
+            <span class="art-section-label">Article</span>
+        <% end_if %>
+    </div>
 
-    <div class="article__header">
-        <div class="article__meta">
-            <% if $Category %><a href="#" class="news-cat">$Category</a><% end_if %>
-        </div>
-        <h1 class="article__title">$Title</h1>
-        <% if $Excerpt %><p class="article__standfirst">$Excerpt</p><% end_if %>
-        <div class="article__byline">
-            <% if $Author %><span class="article__author">$Author</span><% end_if %>
-            <span class="article__date">$Created.Format("EEEE d MMMM Y")</span>
+    <%-- Col 2, Row 1: headline + standfirst --%>
+    <div id="art-col2-top">
+        <h1 class="art-headline">$Title</h1>
+        <% if $Excerpt %><p class="art-standfirst">$Excerpt</p><% end_if %>
+    </div>
+
+    <%-- Col 1, Row 2: author / date / share --%>
+    <div id="art-col1-bottom">
+        <% if $Author %><div class="art-author">$Author</div><% end_if %>
+        <div class="art-date">$Created.Format("EEEE d MMMM Y")</div>
+        <div class="share-icons">
+            <a href="#">f</a>
+            <a href="#">t</a>
         </div>
     </div>
 
-    <% if $FeaturedImage %>
-    <div class="article__hero">
-        $FeaturedImage.ScaleWidth(1600)
-    </div>
-    <% end_if %>
+    <%-- Col 2, Row 2: image + caption + body --%>
+    <div id="art-col2-bottom">
+        <div class="art-hero">
+            <% if $FeaturedImage %>
+                $FeaturedImage.ScaleWidth(1600)
+            <% else %>
+                <div class="news-placeholder" style="width:100%;padding-top:66.66%;"></div>
+            <% end_if %>
+        </div>
+        <p class="art-caption"><% if $FeaturedImage %>Photograph<% end_if %></p>
 
-    <div class="article__layout">
-        <aside class="article__sidebar article__sidebar--left">
-            <div class="article__share">
-                <p class="article__share-label">Share</p>
-                <a href="#" class="article__share-link">Twitter</a>
-                <a href="#" class="article__share-link">Facebook</a>
-                <a href="#" class="article__share-link">Copy link</a>
+        <%-- Inline meta: only visible when left col is hidden (mobile) --%>
+        <div class="art-inline-meta">
+            <% if $Author %><div class="art-author">$Author</div><% end_if %>
+            <div class="art-date">$Created.Format("EEEE d MMMM Y")</div>
+            <div class="share-icons">
+                <a href="#">f</a>
+                <a href="#">t</a>
             </div>
-        </aside>
+        </div>
 
-        <div class="article__body">
+        <div class="art-body">
             $Content
         </div>
-
-        <aside class="article__sidebar article__sidebar--right">
-            <div class="article__related">
-                <h4 class="article__related-title">More Stories</h4>
-                <% loop $RelatedArticles %>
-                    <a href="$Link" class="article__related-item">
-                        <% if $FeaturedImage %>$FeaturedImage.Fill(120,80)<% end_if %>
-                        <span>$Title</span>
-                    </a>
-                <% end_loop %>
-            </div>
-        </aside>
     </div>
 
-</article>
+    <%-- Col 3, Rows 1+2: Related --%>
+    <div id="art-sidebar">
+        <h4 class="sidebar-heading">Related</h4>
+        <% loop $RelatedArticles %>
+        <a href="$Link"><div class="related-item">
+            <% if $FeaturedImage %>
+                $FeaturedImage.Fill(72,54)
+            <% else %>
+                <div class="news-placeholder" style="width:72px;height:54px;flex-shrink:0;"></div>
+            <% end_if %>
+            <h5>$Title</h5>
+        </div></a>
+        <% end_loop %>
+    </div>
+
+</div>

@@ -28,6 +28,35 @@ namespace {
             return ArticlePage::get()->exclude('ID', $featured->ID)->sort('Created DESC')->first();
         }
 
+        /**
+         * Get articles for section2 grid, excluding featured + secondary.
+         */
+        public function getGridArticles()
+        {
+            $exclude = [];
+            if ($f = $this->getFeaturedArticle()) $exclude[] = $f->ID;
+            if ($s = $this->getSecondaryArticle()) $exclude[] = $s->ID;
+            return ArticlePage::get()->exclude('ID', $exclude)->sort('Created DESC')->limit(6);
+        }
+
+        /** First 2 grid articles — shown as image cards */
+        public function getImageCardArticles()
+        {
+            return $this->getGridArticles()->limit(2, 0);
+        }
+
+        /** Next 2 grid articles — shown as text drawers in column 3 */
+        public function getDrawerArticlesCol3()
+        {
+            return $this->getGridArticles()->limit(2, 2);
+        }
+
+        /** Next 2 grid articles — shown as text drawers in column 4 */
+        public function getDrawerArticlesCol4()
+        {
+            return $this->getGridArticles()->limit(2, 4);
+        }
+
         public function getCMSFields()
         {
             $fields = parent::getCMSFields();
