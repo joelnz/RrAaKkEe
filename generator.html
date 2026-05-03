@@ -1,0 +1,363 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+    </head>
+
+    <style>
+
+
+body{
+    background: white;
+}
+article{
+    width: 900px;
+    margin-left: -450px;
+    position: absolute;
+    font-family: 'helvetica';
+    left: 50%;
+    background: white;
+
+/*border-right: 1px solid gainsboro;*/
+top: 101px;
+padding: 10px;
+height: 100%;
+
+   
+    
+}
+p{
+    font-size: 14px;
+}
+#sidebar{
+    float: left;
+  
+    width: 200px;
+    height: 100%;
+    padding: 10px;
+    margin-left: 20px;
+    border-left: 1px solid lime;
+}
+#img{
+      width: 60%;
+    
+    float: right;
+    margin-left: 40px;
+ 
+}
+#hi{
+
+     margin: 0;
+     line-height: 35px;
+     font-size: 27px;
+     border-bottom: 1px solid gainsboro;
+     font-style: italic;
+     font-weight: normal;
+
+   
+    
+     padding: 10px 0;
+}
+#cap{
+    margin:10px 0;
+    font-style: italic;
+       font-size: 12px;
+   
+}
+img{
+    width: 100%;
+
+
+}
+h4{
+    color: yellowgreen;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+letter-spacing: 0.1em;
+margin: 0;
+margin-top: 10px;
+}
+#out{
+    width: 400px;
+}
+#author{
+    
+    font-size: 11px;
+    text-transform: uppercase;
+}
+h3{
+    
+    font-size: 70px;
+    margin: 0;
+    text-align: center;
+}
+
+h2{
+    border-bottom: 1px solid gainsboro;
+    font-size: 13px;
+    padding: 5px 0;
+    margin: 0;
+}
+
+h5{
+    color: darkgray;
+    font-size: 17px;
+    padding: 0;
+    margin: 0;
+}
+#controls{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 100px;
+    overflow: scroll;
+}
+nav{
+
+    width: 100%;
+    background: white;
+    height: 100px;
+    position: absolute;
+    text-align: center;
+    float: left;
+    padding: 0;
+   
+    
+
+
+}
+
+ul{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 650px;
+    height: 100%;
+    
+    left: 50%;
+    margin: 0 0 0 -325px;
+    bottom: 0;
+    padding: 10px;
+    
+
+    
+
+  
+
+}
+li{
+    display: inline;
+    padding: 10px 10px;
+    font-size: 13px;
+    margin: 0;
+    float: left;
+    color: darkkhaki;
+    float: right;
+
+}
+
+#art{
+    width: 600px;
+    float: left;
+}
+
+#sidebar p{
+    border-bottom: 1px solid gainsboro;
+    padding: 5px;
+}
+    </style>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+   <div id="controls">
+        <textarea id="in" rows="1" cols="50"></textarea><br />
+<button id="add">Add</button> <button id="generate" disabled="disabled">Generate</button><br /></div>
+
+
+ <nav>
+    <ul>
+        <li>Culture</li><li>Art</li><li>Dance</li><li>Exhibtion</li>
+    </ul>
+</nav> 
+
+<article>
+ 
+<div id="art"> 
+<h1 id="hi"></h1>
+<p id="author">by JP Cocks</p>
+ <div id="img"><img src=""><div id="cap"></div></div>
+<p id="p1" ></p>
+<p id="p2" ></p>
+<p id="p3" ></p>
+<p id="p4" ></p>
+<p id="p6" ></p>
+<p id="p7" ></p>
+<p id="p8" ></p>
+<p id="out" ></p>
+</div>
+<div id="sidebar"></div>
+
+</article>
+
+
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+
+        <script type="text/javascript">
+        // Returns the source text
+function get() { return document.getElementById('in').value; }
+ 
+// Clears the source textbox
+function clear() { document.getElementById('in').value = ''; }
+ 
+// Writes to the output textbox
+function set(v) { document.getElementById('out').innerHTML = v; }
+ 
+// Holds the state information
+var cache = {
+    '_START': []
+};
+ 
+document.getElementById('add').onclick = function () {
+    // Get the source text and split it into words
+    
+
+    var text = get().split(/\s+/g);
+
+    
+    if (!text.length)
+        return;
+ 
+    document.getElementById('generate').disabled = false;
+ 
+    // Add it to the start node's list of possibility
+    cache['_START'].push(text[0]);
+    
+    // Now go through each word and add it to the previous word's node
+    for (var i = 0; i < text.length - 1; i++) {
+        if (!cache[text[i]])
+            cache[text[i]] = [];
+        cache[text[i]].push(text[i + 1]);
+        
+        // If it's the beginning of a sentence, add the next word to the start node too
+        if (text[i].match(/\.$/))
+            cache['_START'].push(text[i + 1]);
+    }
+    clear();
+};
+ 
+document.getElementById('generate').onclick = function () {
+    image();
+    // Start with the root node
+    var currentWord = '_START';
+    var str = '';
+    
+    // Generate 300 words of text
+    for (var i = 0; i < 10000; i++) {
+        
+        // Follow a random node, append it to the string, and move to that node
+        var rand = Math.floor(Math.random() * cache[currentWord].length);
+        str += cache[currentWord][rand];
+        
+        // No more nodes to follow? Start again. (Add a period to make things look better.)
+        if (!cache[cache[currentWord][rand]]) {
+            currentWord = '_START';
+            if (!cache[currentWord][rand].match(/\.$/))
+                str += '. ';
+            else
+                str += ' ';
+        } else {
+            currentWord = cache[currentWord][rand];
+            str += ' ';
+        }
+    }
+
+var res = str.match( /[^\.!\?]+[\.!\?]+/g);
+
+
+
+    set(str);
+document.getElementById('hi').innerHTML = res[3];
+
+
+document.getElementById('cap').innerHTML = res[5];
+document.getElementById('p1').innerHTML = res[0] + ' ' + res[1] + ' ' + res[2] + ' ' + res[3] + ' ' + res[4] ;
+document.getElementById('p2').innerHTML = res[5] + ' ' + res[6] + ' ' + res[7] + ' ' + res[8];
+document.getElementById('p3').innerHTML = res[9] + ' ' + res[10] + ' ' + res[11] + ' ' + res[12] + ' ' + res[13] + ' ' + res[14];
+document.getElementById('p4').innerHTML = res[15] + ' ' + res[16] + ' ' + res[17] ;
+
+
+
+
+}
+
+
+
+
+
+function image (){
+    var random = Math.floor(Math.random() * 39) + 1 ;
+
+     
+
+        $.getJSON( "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=fe76c865654cfba7361ca011b4096dd3&photoset_id=72157658833741705&format=json&nojsoncallback=1&extras=original_format,url_c,description,tags" , function(d) {
+            
+
+            for (var x = random; x < random + 1 ; x++) {
+                var photo = d.photoset.photo[x];
+                var bt_url = "http://farm"+ photo.farm +".static.flickr.com/"+ photo.server +"/"+ photo.id +"_"+ photo.secret +"_q.jpg";
+                var c_url = "http://farm"+ photo.farm +".static.flickr.com/"+ photo.server +"/"+ photo.id +"_"+ photo.secret +"_c.jpg";
+                var r =  c_url;
+            };
+                
+            
+            $('img').attr('src', r);
+        });
+}
+
+
+
+  
+      
+    
+
+
+
+
+
+
+
+
+
+
+
+</script>
+    </body>
+</html>
