@@ -21,8 +21,8 @@
     <script>
     $(document).scroll(function() {
         var y = $(this).scrollTop();
-        if (y > 190) { $("#mobnav").css("display","flex"); }
-        else { $("#mobnav").hide(); }
+        if (y > 190) { $(".rake-topbar").css("display","flex"); }
+        else { $(".rake-topbar").hide(); }
     });
     </script>
 </body>

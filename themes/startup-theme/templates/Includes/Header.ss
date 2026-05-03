@@ -1,21 +1,21 @@
-<div id="mobnav">
-    <a href="$BaseHref" id="navinner">
-        <span class="rr">Rr</span><span class="aa">Aa</span><span class="kk">Kk</span><span class="ee">Ee</span>
+<div class="rake-topbar">
+    <a href="$BaseHref" class="nav__wordmark">
+        <span class="nav__letter nav__letter--rr">Rr</span><span class="nav__letter nav__letter--aa">Aa</span><span class="nav__letter nav__letter--kk">Kk</span><span class="nav__letter nav__letter--ee">Ee</span>
     </a>
-    <ul class="sections">
+    <ul class="nav__sections">
         <% loop $Menu(1) %>
-            <li class="$LinkingMode"><a href="$Link">$MenuTitle</a></li>
+            <li class="nav__section-item $LinkingMode"><a href="$Link">$MenuTitle</a></li>
         <% end_loop %>
     </ul>
 </div>
 
 <nav>
-    <a href="$BaseHref" id="navinner">
-        <span class="rr">Rr</span><span class="aa">Aa</span><span class="kk">Kk</span><span class="ee">Ee</span>
+    <a href="$BaseHref" class="nav__wordmark">
+        <span class="nav__letter nav__letter--rr">Rr</span><span class="nav__letter nav__letter--aa">Aa</span><span class="nav__letter nav__letter--kk">Kk</span><span class="nav__letter nav__letter--ee">Ee</span>
     </a>
-    <ul class="sections">
+    <ul class="nav__sections">
         <% loop $Menu(1) %>
-            <li class="$LinkingMode"><a href="$Link">$MenuTitle</a></li>
+            <li class="nav__section-item $LinkingMode"><a href="$Link">$MenuTitle</a></li>
         <% end_loop %>
     </ul>
 </nav>
