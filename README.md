@@ -2,6 +2,8 @@
 
 RrAaKkEe is a poetic news site build in Silverstripe CMS.
 
+https://www.loom.com/share/7190c6d2afd9490798fd247c62d922c7
+
 ## The Concept
 
 I started this in 2015. The idea was that I  feed the generator samples of writing (news articles, books, essays) and click Generate. It produces new text based on the probability of what word would come next. I paired the output with my own photos from Flickr. The titles that came out were often fun and weirdly poetic, and I liked seeing what unexpected image combinations would appear.
